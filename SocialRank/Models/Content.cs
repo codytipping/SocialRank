@@ -2,6 +2,7 @@
 
 public class Content
 {
+    public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Name { get; set; } = string.Empty;
     public double Rank { get; set; } = 0.0;
     public List<Content> Links { get; } = new List<Content>();
