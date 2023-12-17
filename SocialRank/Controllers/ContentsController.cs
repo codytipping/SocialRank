@@ -45,7 +45,7 @@ namespace SocialRank.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Rank")] Content content)
+        public async Task<IActionResult> Create([Bind("Name,Description")] Content content)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace SocialRank.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Rank")] Content content)
+        public async Task<IActionResult> Edit(string id, [Bind("Name,Description")] Content content)
         {
             if (id != content.Id)
             {

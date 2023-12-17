@@ -12,7 +12,7 @@ using SocialRank.Data;
 namespace SocialRank.Migrations
 {
     [DbContext(typeof(SocialRankContext))]
-    [Migration("20231217200716_Create")]
+    [Migration("20231217205113_Create")]
     partial class Create
     {
         /// <inheritdoc />
@@ -235,16 +235,25 @@ namespace SocialRank.Migrations
                     b.Property<string>("ContentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Rank")
                         .HasColumnType("float");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ContentId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Contents");
                 });
@@ -305,6 +314,12 @@ namespace SocialRank.Migrations
                     b.HasOne("SocialRank.Models.Content", null)
                         .WithMany("Links")
                         .HasForeignKey("ContentId");
+
+                    b.HasOne("SocialRank.Areas.Identity.Data.SocialRankUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SocialRank.Models.Content", b =>
