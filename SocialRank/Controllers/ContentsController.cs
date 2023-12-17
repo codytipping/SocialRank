@@ -51,7 +51,7 @@ public class ContentsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Name,Description")] Content content)
+    public async Task<IActionResult> Create([Bind("Title,Description")] Content content)
     {
         if (ModelState.IsValid)
         {
@@ -59,53 +59,6 @@ public class ContentsController : Controller
             content.UserId = user!.Id;
             _context.Add(content);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-        return View(content);
-    }
-
-    public async Task<IActionResult> Edit(string id)
-    {
-        if (id == null || _context.Contents == null)
-        {
-            return NotFound();
-        }
-
-        var content = await _context.Contents.FindAsync(id);
-        if (content == null)
-        {
-            return NotFound();
-        }
-        return View(content);
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(string id, [Bind("Name,Description")] Content content)
-    {
-        if (id != content.Id)
-        {
-            return NotFound();
-        }
-
-        if (ModelState.IsValid)
-        {
-            try
-            {
-                _context.Update(content);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ContentExists(content.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
             return RedirectToAction(nameof(Index));
         }
         return View(content);
