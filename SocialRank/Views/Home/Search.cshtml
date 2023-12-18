@@ -1,0 +1,41 @@
+﻿@model IEnumerable<UserRank>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@await Html.PartialAsync("_SearchPartial")
+<div class="text-center">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>               
+                <th>
+                    @Html.DisplayNameFor(model => model.Rank)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rank)
+                    </td>                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

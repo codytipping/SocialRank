@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SocialRank.Algorithms;
-using SocialRank.Areas.Identity.Data;
 using SocialRank.Data;
 using SocialRank.Models;
 
