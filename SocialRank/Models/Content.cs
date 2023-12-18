@@ -14,5 +14,5 @@ public class Content
     public string? UserId { get; set; } = string.Empty;
     public virtual SocialRankUser? User { get; set; }
 
-    public List<Content>? Links { get; } = new List<Content>();
+    public List<SocialRankUser>? Links { get; } = new List<SocialRankUser>();
 }

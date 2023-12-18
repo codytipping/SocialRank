@@ -5,7 +5,7 @@ namespace SocialRank.Algorithms;
 public class RankCalculator
 {
     private const double DampingFactor = 0.85;
-    
+
     public void CalculateRank(List<UserRank> users, int iterations = 100)
     {
         int userCount = users.Count;
