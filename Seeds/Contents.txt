@@ -1,5 +1,4 @@
--- Insert science projects into the ScienceProjects table
-INSERT INTO ScienceProjects (Id, Title, Description, Rank, UserId, ContentId)
+INSERT INTO Contents (Id, Title, Description, Rank, UserId, ContentId)
 VALUES
     (NEWID(), 'Gödel''s Incompleteness Endeavor', 'Exploring the implications of Gödel''s incompleteness theorems in formal systems.', 4.5, '8b3c7b59-11b6-44f3-9e91-1a3fef3d9c07', NULL),
     (NEWID(), 'Schrödinger''s Quantum Quest', 'Investigating the principles of quantum superposition and entanglement.', 3.8, '8b3c7b59-11b6-44f3-9e91-1a3fef3d9c07', NULL),
