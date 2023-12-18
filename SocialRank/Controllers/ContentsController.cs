@@ -76,8 +76,9 @@ public class ContentsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Endorse(string id)
     {
+        var user = await _userManager.GetUserAsync(User);
         var content = await _context.Contents.FirstOrDefaultAsync(m => m.Id == id);
-        // INSERT LINK CREATION.
+        content!.Links!.Add(user!);
         return RedirectToAction(nameof(Index));
     }
 
