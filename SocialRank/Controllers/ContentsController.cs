@@ -29,18 +29,7 @@ public class ContentsController : Controller
 
     public async Task<IActionResult> Details(string id)
     {
-        if (id == null || _context.Contents == null)
-        {
-            return NotFound();
-        }
-
-        var content = await _context.Contents
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (content == null)
-        {
-            return NotFound();
-        }
-
+        var content = await _context.Contents.FirstOrDefaultAsync(m => m.Id == id);
         return View(content);
     }
 
@@ -65,19 +54,8 @@ public class ContentsController : Controller
     }
 
     public async Task<IActionResult> Delete(string id)
-    {
-        if (id == null || _context.Contents == null)
-        {
-            return NotFound();
-        }
-
-        var content = await _context.Contents
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (content == null)
-        {
-            return NotFound();
-        }
-
+    {       
+        var content = await _context.Contents.FirstOrDefaultAsync(m => m.Id == id);       
         return View(content);
     }
 
@@ -85,17 +63,21 @@ public class ContentsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(string id)
     {
-        if (_context.Contents == null)
-        {
-            return Problem("Entity set 'SocialRankContext.Contents'  is null.");
-        }
         var content = await _context.Contents.FindAsync(id);
         if (content != null)
         {
             _context.Contents.Remove(content);
         }
-        
         await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost, ActionName("Endorse")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Endorse(string id)
+    {
+        var content = await _context.Contents.FirstOrDefaultAsync(m => m.Id == id);
+        // INSERT LINK CREATION.
         return RedirectToAction(nameof(Index));
     }
 
