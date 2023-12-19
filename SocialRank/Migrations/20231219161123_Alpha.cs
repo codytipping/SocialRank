@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SocialRank.Migrations
 {
     /// <inheritdoc />
-    public partial class Create : Migration
+    public partial class Alpha : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -90,6 +90,30 @@ namespace SocialRank.Migrations
                         column: x => x.ContentId,
                         principalTable: "Contents",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserContents",
+                columns: table => new
+                {
+                    ContentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserContents", x => new { x.ContentId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_UserContents_Contents_ContentId",
+                        column: x => x.ContentId,
+                        principalTable: "Contents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserContents_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -195,6 +219,11 @@ namespace SocialRank.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserContents_UserId",
+                table: "UserContents",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "Users",
                 column: "NormalizedEmail");
@@ -243,6 +272,9 @@ namespace SocialRank.Migrations
 
             migrationBuilder.DropTable(
                 name: "RolesClaim");
+
+            migrationBuilder.DropTable(
+                name: "UserContents");
 
             migrationBuilder.DropTable(
                 name: "UsersClaim");

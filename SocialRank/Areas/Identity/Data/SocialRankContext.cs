@@ -10,6 +10,7 @@ public class SocialRankContext : IdentityDbContext<SocialRankUser>
 {
     public SocialRankContext(DbContextOptions<SocialRankContext> options) : base(options) { }
     public DbSet<Content> Contents { get; set; }
+    public DbSet<UserContent> UserContents { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -21,5 +22,6 @@ public class SocialRankContext : IdentityDbContext<SocialRankUser>
         builder.Entity<IdentityUserLogin<string>>(entity => { entity.ToTable("UsersLogin"); });
         builder.Entity<IdentityUserRole<string>>(entity => { entity.ToTable("UsersRole"); });
         builder.Entity<IdentityUserToken<string>>(entity => { entity.ToTable("UsersToken"); });
+        builder.Entity<UserContent>().HasKey(u => new { u.ContentId, u.UserId });
     }
 }

@@ -16,3 +16,14 @@ public class Content
 
     public List<SocialRankUser>? Links { get; set; } = new List<SocialRankUser>();
 }
+
+public class UserContent
+{
+    [ForeignKey("Content")]
+    public string? ContentId { get; set; } = string.Empty;
+    public virtual Content? Content { get; set; }
+
+    [ForeignKey("User")]
+    public string? UserId { get; set; } = string.Empty;
+    public virtual SocialRankUser? User { get; set; }
+}

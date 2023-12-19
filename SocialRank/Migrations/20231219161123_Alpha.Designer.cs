@@ -12,8 +12,8 @@ using SocialRank.Data;
 namespace SocialRank.Migrations
 {
     [DbContext(typeof(SocialRankContext))]
-    [Migration("20231218020217_Create")]
-    partial class Create
+    [Migration("20231219161123_Alpha")]
+    partial class Alpha
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,6 +258,21 @@ namespace SocialRank.Migrations
                     b.ToTable("Contents");
                 });
 
+            modelBuilder.Entity("SocialRank.Models.UserContent", b =>
+                {
+                    b.Property<string>("ContentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ContentId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserContents");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -321,6 +336,25 @@ namespace SocialRank.Migrations
                     b.HasOne("SocialRank.Areas.Identity.Data.SocialRankUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SocialRank.Models.UserContent", b =>
+                {
+                    b.HasOne("SocialRank.Models.Content", "Content")
+                        .WithMany()
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SocialRank.Areas.Identity.Data.SocialRankUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Content");
 
                     b.Navigation("User");
                 });
