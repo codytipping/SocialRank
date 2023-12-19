@@ -23,7 +23,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rank)
-            </th>
+            </th>            
             <th></th>
         </tr>
     </thead>
@@ -44,7 +44,10 @@
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <form asp-action="Endorse" asp-route-id="@item.Id"method="post">
+                    <button class="btn btn-primary" type="submit">Endorse</button>
+                </form>
             </td>
         </tr>
 }
