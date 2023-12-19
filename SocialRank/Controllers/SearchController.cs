@@ -38,13 +38,13 @@ public class SearchController : Controller
         return contents!;
     }
 
-    private List<UserRank> SearchUsers(List<Content> contents)
+    private static List<UserRank> SearchUsers(List<Content> contents)
     {
         var userRanks = new List<UserRank>(); 
         var searchUserIds = contents.Select(u => u.UserId).ToList();
         foreach (var content in contents) 
         {
-            var userRank = new UserRank { UserId = content.UserId! };
+            var userRank = new UserRank { UserId = content.UserId! };            
             var linkUserIds = content.Links!.Select(u => u.UserId).ToList();           
             foreach (var linkUserId in linkUserIds)
             {      
@@ -53,11 +53,11 @@ public class SearchController : Controller
                     if (string.Compare(searchUserId, linkUserId) == 0)
                     {
                         var link = new UserRank { UserId = linkUserId! };
-                        userRank.Links!.Add(link!);
-                        userRanks.Add(userRank);
+                        userRank.Links!.Add(link!);                        
                     }
                 }               
             }
+            userRanks.Add(userRank);
         }
         return userRanks;
     }
