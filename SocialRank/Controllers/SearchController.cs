@@ -45,7 +45,7 @@ public class SearchController : Controller
         foreach (var content in contents) 
         {
             var userRank = new UserRank { UserId = content.UserId! };
-            var linkUserIds = content.Links!.Select(u => u.Id).ToList();           
+            var linkUserIds = content.Links!.Select(u => u.UserId).ToList();           
             foreach (var linkUserId in linkUserIds)
             {      
                 foreach (var searchUserId in searchUserIds)

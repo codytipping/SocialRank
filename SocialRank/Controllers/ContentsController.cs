@@ -77,12 +77,13 @@ public class ContentsController : Controller
     public async Task<IActionResult> Endorse(string id)
     {
         var user = await _userManager.GetUserAsync(User);
-        var content = await _context.Contents.Include(c => c.Links).FirstOrDefaultAsync(m => m.Id == id);
-        if (!content!.Links!.Any(u => u.Id == user!.Id))
+        var content = await _context.Contents.Where(c => c.Id == id).Include(c => c.Links).FirstOrDefaultAsync();  
+        if (!content!.Links!.Any(l => l.UserId == user!.Id))
         {
-            content!.Links!.Add(user!);
+            UserContent userContent = new() { UserId = user!.Id, ContentId = content.Id };
+            content!.Links!.Add(userContent);
             await _context.SaveChangesAsync();
-        }        
+        }            
         return RedirectToAction(nameof(Index));
     }
 
