@@ -34,7 +34,7 @@ public class SearchController : Controller
             !string.IsNullOrWhiteSpace(searchText) && 
             (u.Title != null && u.Title.Contains(searchText)) || 
             (u.Description != null && u.Description.Contains(searchText))
-        ).ToListAsync();
+        ).Include(c => c.Links).ToListAsync();
         return contents!;
     }
 
