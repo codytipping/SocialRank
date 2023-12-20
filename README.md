@@ -1,6 +1,5 @@
 # SocialRank
 
-Social RankSocial Rank
 Jun 2023 - PresentJun 2023 - Present
 
 Inspired by Google's PageRank algorithm, I created Social Rank to work with Artificial Intelligence to reveal how powerful ideas can influence the minds’ of others in any given domain. 
